@@ -2,8 +2,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="DataDrivenframework">
     <test verbose="2" preserve-order="true" name="test1">
-        <classes>
-            <class name="tests.LoginTest"/>
-        </classes>
+        <packages>
+            <package name="tests"/>
+        </packages>
     </test>
 </suite>
