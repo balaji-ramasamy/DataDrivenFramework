@@ -1,5 +1,6 @@
 package base;
 
+import driver.DriverManager;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import utils.ExcelReaderUtil;
 import utils.ILogger;
+import utils.ScreenshotUtil;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -47,25 +49,15 @@ public class BaseTest implements ILogger {
 
 
     @BeforeMethod
-    public void initDriver() {
+    public void initializeDriver() {
 
-        if (config.getProperty("browser").toLowerCase().equalsIgnoreCase("chrome")) {
-            log.info("initiating chrome driver");
-            WebDriverManager.chromedriver().setup();
-            log.info("launching chrome browser");
-            driver = new ChromeDriver();
-        }
-        if (config.getProperty("browser").toLowerCase().equalsIgnoreCase("firefox")) {
-            log.info("initiating firefox driver");
-            WebDriverManager.firefoxdriver().setup();
-            log.info("launching firefox browser");
-            driver = new FirefoxDriver();
-        }
-
+        DriverManager driverManager = new DriverManager();
+        driver = driverManager.initDriver(config.getProperty("browser"));
         driver.manage().window().maximize();
         log.info("navigating to URL: " + config.getProperty("url"));
         driver.get(config.getProperty("url"));
         wait = new WebDriverWait(driver, Duration.ofSeconds(Long.parseLong(config.getProperty("explicit.wait"))));
+
     }
 
     @AfterMethod
