@@ -26,4 +26,8 @@ public final class ScreenshotUtil extends BaseTest {
         }
         return destFile;
     }
+
+    public static String getScreenshotAsBASE64() {
+        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
+    }
 }

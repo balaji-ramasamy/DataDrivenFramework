@@ -2,15 +2,37 @@ package listeners;
 
 import driver.DriverManager;
 import lombok.SneakyThrows;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
-import org.testng.Reporter;
+import org.testng.*;
+import reporting.ExtentLogger;
+import reporting.ExtentManager;
+import reporting.ExtentReport;
 import utils.ScreenshotUtil;
 
 import java.io.File;
 
-public class CustomListeners implements ITestListener {
+public class CustomListeners implements ITestListener, ISuiteListener {
+
+
+    /**
+     * This method is invoked before the SuiteRunner starts.
+     *
+     * @param suite The suite
+     */
+    @Override
+    public void onStart(ISuite suite) {
+       ExtentReport.initReport();
+    }
+
+    /**
+     * This method is invoked after the SuiteRunner has run all the tests in the suite.
+     *
+     * @param suite The suite
+     */
+    @Override
+    public void onFinish(ISuite suite) {
+        ExtentReport.flushReport();
+    }
+
     /**
      * Invoked each time before a test will be invoked. The <code>ITestResult</code> is only partially
      * filled with the references to class, method, start millis and status.
@@ -20,7 +42,7 @@ public class CustomListeners implements ITestListener {
      */
     @Override
     public void onTestStart(ITestResult result) {
-        ITestListener.super.onTestStart(result);
+        ExtentReport.createTest(result.getMethod().getMethodName());
     }
 
     /**
@@ -31,7 +53,7 @@ public class CustomListeners implements ITestListener {
      */
     @Override
     public void onTestSuccess(ITestResult result) {
-        ITestListener.super.onTestSuccess(result);
+        ExtentLogger.pass(result.getMethod().getMethodName()+" is passed");
     }
 
     /**
@@ -43,13 +65,14 @@ public class CustomListeners implements ITestListener {
     @SneakyThrows
     @Override
     public void onTestFailure(ITestResult result) {
+        ExtentLogger.fail(result.getMethod().getMethodName()+" is failed");
+
         File filePath = ScreenshotUtil.getScreenshot(result.getName());
         System.setProperty("org.uncommons.reportng.escape-output","false");
         Reporter.setEscapeHtml(false);
         Reporter.log("<a target=\"_blank\" href=\""+filePath+"/Screenprints/"+filePath+"\">Screenshot</a>");
         Reporter.log("<br>");
         Reporter.log("<img src=\""+filePath+"\" height=200 width=200></img>");
-
 
     }
 
@@ -61,7 +84,7 @@ public class CustomListeners implements ITestListener {
      */
     @Override
     public void onTestSkipped(ITestResult result) {
-        ITestListener.super.onTestSkipped(result);
+        ExtentLogger.skip(result.getMethod().getMethodName()+"is skippoed");
     }
 
     /**
