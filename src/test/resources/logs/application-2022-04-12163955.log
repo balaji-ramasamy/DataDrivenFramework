@@ -1,0 +1,22 @@
+16:39:56.826 [main] INFO  utils.ILogger - initiating chrome driver
+16:39:57.446 [main] INFO  utils.ILogger - launching chrome browser
+16:40:00.425 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
+16:40:05.091 [main] INFO  utils.ILogger - quitting the driver
+16:40:05.790 [main] INFO  utils.ILogger - initiating chrome driver
+16:40:05.823 [main] INFO  utils.ILogger - launching chrome browser
+16:40:07.242 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
+16:40:12.000 [main] INFO  utils.ILogger - quitting the driver
+16:40:12.632 [main] INFO  utils.ILogger - initiating chrome driver
+16:40:12.665 [main] INFO  utils.ILogger - launching chrome browser
+16:40:14.155 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
+16:40:18.635 [main] INFO  utils.ILogger - quitting the driver
+16:40:19.290 [main] INFO  utils.ILogger - initiating chrome driver
+16:40:19.323 [main] INFO  utils.ILogger - launching chrome browser
+16:40:20.693 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
+16:40:22.920 [main] INFO  utils.ILogger - started loginAsBankManager test
+16:40:24.106 [main] INFO  utils.ILogger - successfully completed loginAsBankManager test
+16:40:24.107 [main] INFO  utils.ILogger - quitting the driver
+16:40:24.736 [main] INFO  utils.ILogger - initiating chrome driver
+16:40:24.783 [main] INFO  utils.ILogger - launching chrome browser
+16:40:26.146 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
+16:40:30.240 [main] INFO  utils.ILogger - quitting the driver

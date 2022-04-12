@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.DataProviderUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,23 +16,17 @@ public class AddCustomerTest extends BaseTest {
 
 
 
-    @Test(dataProvider = "getData")
+    @Test(dataProviderClass = DataProviderUtil.class, dataProvider = "getCustomerCreateData", priority = 1)
     public void addCustomerByBankManagerTest(HashMap<String, String> data) throws InterruptedException {
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(OR.getProperty("bankManagerLoginBtn")))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(OR.getProperty("addCustomerBtn")))).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(OR.getProperty("firstNameInputBox")))).sendKeys(data.get("firstName"));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(OR.getProperty("lastNameInputBox")))).sendKeys(data.get("lastName"));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(OR.getProperty("postCodeInputBox")))).sendKeys(data.get("postCode"));
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(OR.getProperty("addBtn")))).click();
-        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-        Assert.assertTrue(alert.getText().contains(data.get("alertText")),"alert message is incorrect");
+        click(By.cssSelector(OR.getProperty("bankManagerLoginBtn")));
+        click(By.cssSelector(OR.getProperty("addCustomerBtn")));
+        enter(By.cssSelector(OR.getProperty("firstNameInputBox")), data.get("firstName"));
+        enter(By.cssSelector(OR.getProperty("lastNameInputBox")), data.get("lastName"));
+        enter(By.cssSelector(OR.getProperty("postCodeInputBox")), data.get("postCode"));
+        click(By.cssSelector(OR.getProperty("addBtn")));
+        Assert.assertTrue(alertText().contains(data.get("alertText")),"alert message is incorrect");
 
     }
 
-
-    @DataProvider
-    public Object[] getData(){
-        return excelReaderUtil.getData(config.getProperty("testDataSheetName")).toArray();
-    }
 }

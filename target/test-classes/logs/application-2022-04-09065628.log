@@ -1,9 +1,0 @@
-06:56:28.773 [main] INFO  utils.ILogger - initiating chrome driver
-06:56:29.028 [main] INFO  utils.ILogger - launching chrome browser
-06:56:31.685 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
-06:56:35.664 [main] INFO  utils.ILogger - quitting the driver
-06:56:36.322 [main] INFO  utils.ILogger - initiating chrome driver
-06:56:36.340 [main] INFO  utils.ILogger - launching chrome browser
-06:56:38.160 [main] INFO  utils.ILogger - navigating to URL: https://www.way2automation.com/angularjs-protractor/banking/#/login
-06:56:41.609 [main] INFO  utils.ILogger - started loginAsBankManager test
-06:56:42.509 [main] INFO  utils.ILogger - quitting the driver

@@ -1,36 +1,33 @@
 package base;
 
 import driver.DriverManager;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import utils.ExcelReaderUtil;
 import utils.ILogger;
-import utils.ScreenshotUtil;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class BaseTest implements ILogger {
 
     protected static WebDriver driver = null;
     protected static Properties config = new Properties();
     protected static Properties OR = new Properties();
-    protected static ExcelReaderUtil excelReaderUtil = null;
     protected static WebDriverWait wait;
 
     @BeforeSuite
@@ -38,7 +35,7 @@ public class BaseTest implements ILogger {
         try {
             config.load(new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/config/config.properties"));
             OR.load(new FileInputStream(System.getProperty("user.dir") + "/src/test/resources/config/OR.properties"));
-            excelReaderUtil = new ExcelReaderUtil(System.getProperty("user.dir") + config.getProperty("excelFilePath"));
+            ExcelReaderUtil.loadExcel(System.getProperty("user.dir")+config.getProperty("excelFilePath"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -75,5 +72,25 @@ public class BaseTest implements ILogger {
             log.error(e.getMessage());
             return false;
         }
+    }
+
+    protected void click(By locator){
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
+    protected void enter(By locator, String text){
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator)).sendKeys(text);
+    }
+    protected String alertText(){
+        return wait.until(ExpectedConditions.alertIsPresent()).getText();
+    }
+
+    protected boolean isDisplayed(By locator){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
+    }
+
+    protected void select(By locator, String value){
+      Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(locator)));
+      select.selectByVisibleText(value);
     }
 }

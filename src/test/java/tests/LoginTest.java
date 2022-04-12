@@ -12,10 +12,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginAsBankManager(){
         log.info("started loginAsBankManager test");
-        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(OR.getProperty("bankManagerLoginBtn")))).click();
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(OR.getProperty("addCustomerBtn"))));
-        Assert.assertTrue(element.isDisplayed(), "Login Not Successful");
-        Assert.fail();
+        click(By.cssSelector(OR.getProperty("bankManagerLoginBtn")));
+        Assert.assertTrue(isDisplayed(By.cssSelector(OR.getProperty("addCustomerBtn"))), "Login Not Successful");
         log.info("successfully completed loginAsBankManager test");
     }
 }

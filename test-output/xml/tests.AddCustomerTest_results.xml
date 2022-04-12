@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="test1"
-           tests="1"
+           tests="3"
            failures="0"
            errors="0"
            skipped="0"
-           time="2.151">
+           time="5.503">
   <properties />
   
   
-            <testcase name="addCustomerByBankManagerTest" time="2.151" classname="tests.AddCustomerTest" />
+            <testcase name="addCustomerByBankManagerTest" time="1.595" classname="tests.AddCustomerTest" />
+                <testcase name="addCustomerByBankManagerTest" time="2.152" classname="tests.AddCustomerTest" />
+                <testcase name="addCustomerByBankManagerTest" time="1.756" classname="tests.AddCustomerTest" />
       
 </testsuite>

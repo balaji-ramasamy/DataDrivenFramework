@@ -1,5 +1,0 @@
-base\BaseTest.class
-tests\AddCustomerTest.class
-utils\ExcelReaderUtil.class
-utils\ILogger.class
-tests\LoginTest.class
